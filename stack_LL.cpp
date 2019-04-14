@@ -1,65 +1,73 @@
 #include <iostream>
-#define MAX_STACK_SIZE 10
+using namespace std;
 
-struct Element {
-    int data;
+struct node {
+	int data;
+	node *next;
 };
 
-class MyStack {
-    private:
-    Element stack[MAX_STACK_SIZE];
+node *head = NULL;
 
-    int top=-1;
+void isi(int variable) {
+	node *baru = new node;
+	baru->data = variable;
+	baru->next = head;
+	head = baru;
+}
 
-    public:
-    bool isEmpty(){
-        return (top<0); 
-    }
-    bool isFull(){
-        return top == MAX_STACK_SIZE-1;
-    }
-    void push(int data){
-        Element item;
-        item.data=data;
-        if (!isFull()){
-            stack[++top]=item;
-        } else {
-            std::cout<<"Stack Penuh"<<std::endl;
-        }
-    }
-    Element pop(){
-        Element item;
-        if (!isEmpty()){
-            item = stack[top--];
-        } else {
-            std::cout<<"Stack Kosong"<<std::endl;
-        }
-        return item;
-    }
-    void printStackList(){
-        if (!isEmpty()){
-            for (int i=top;i>=0;i--)
-                std::cout<<stack[i].data<<std::endl;
-        } else {
-            std::cout<<"Stack Kosong"<<std::endl;
-        }
-    }
-    int getTop(){
-        return top;
-    }
-};
+void hapus() {
+	if (head == '\0') {
+		cout<<"Stack kosong!\n";
+	}
+	else {
+		cout<<endl<<"Data "<<head->data<<" terhapus.\n";
+		head = head->next;
+	}
+}
 
-int main()
-{
-    MyStack s;
-    s.push(8);
-    s.push(3);
-    s.push(2);
-    s.push(9);
-    s.pop();
-    s.pop();
-    s.pop();
-    s.pop();
-    s.printStackList();
-    return 0;
+void tampil () {
+	node *bantu = head;
+	cout<<"\nElemen di stack:\n";
+	while (bantu != NULL) {
+		cout<<bantu->data<<endl;
+		bantu = bantu->next;
+	}
+}
+
+int main () {
+	int pil, n;
+	do {
+	if (head != NULL) 
+		tampil();
+		
+		
+
+	cout<<"=============================="<<endl;
+	cout<<"nama : pandi barep arianza    "<<endl;
+	cout<<"npm  : 1817051002 "<<endl;
+	cout<<"=============================="<<endl;	
+	cout<<"\n1. Isi"<<endl;
+	cout<<"2. Hapus"<<endl;
+	cout<<"3. Keluar"<<endl;
+	cout<<"Pilih: "; cin>>pil;
+	cout<<endl;
+	switch (pil) {
+		case 1:
+			cout<<"Isi data: "; cin>>n;
+			isi(n);
+			break;
+		
+		case 2:
+			hapus();
+			break;
+			
+		case 3:
+			cout<<"\nBye! dibuat oleh : pandi barep arianza :)";
+			break;
+		
+		default:
+			cout<<"\n Pilihan tidak tersedia.\n";		
+		}
+	}while (pil != 3);
+	return 0;	
 }
